@@ -1,0 +1,33 @@
+﻿@using BookShop.ViewModel
+@model List<UserRoleViewModel>
+
+@{
+    var RoleId = ViewData["RoleId"];
+    var RoleName = ViewData["RoleName"];
+
+}
+<form method="post">
+    <div>
+        <h2 class="mb-3">Edit users in Role"@RoleName"</h2>
+        <div>
+            @for(int i=0;i<Model.Count;i++)
+            {
+                <div class="form-check my-1">
+                    <input type="hidden" asp-for="@Model[i].Id" />
+                    <input type="hidden" asp-for="@Model[i].Id" />
+                    <input asp-for="@Model[i].ISSelected" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model[i].ISSelected">
+                        @Model[i].Name
+                    </label>
+
+                </div>
+
+
+            }
+        </div>
+            <div class="my-3">
+                <a asp-action="EditRole" asp-route-id="@RoleId" class="btn btn-warning">Cancel</a>
+            <input type="submit" value="Update" class="btn btn-success" />
+            </div>
+    </div>
+</form>

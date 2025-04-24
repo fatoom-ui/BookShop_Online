@@ -1,0 +1,60 @@
+﻿@model BookShop.Models.Order
+<h1>Thank you for your order</h1>
+<h5 class="mt-5"> Order Id @Model.Id </h5>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Book</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                var itemtotal = item.Book.Price * item.quantity;
+                <tr>
+                    <td>
+                        <a class="a-cleanup" asp-controller="Store" asp-action="Details" asp-route-id="@item.Book.Id">
+
+                            <img src="@item.Book.ImageUrl" style="height:4em" />
+                        </a>
+                    </td>
+                    <td>
+                        <a class="a-cleanup" asp-controller="Store" asp-action="Details" asp-route-id="@item.Book.Id">
+                            @item.Book.Title
+                        </a>
+                    </td>
+                    <td>
+                        @itemtotal.ToString("c");
+                    </td>
+                    <td>
+                        @item.quantity
+                        @* <span class="badge badge-primary">@item.quantity</span> *@
+
+                    </td>
+                    
+                </tr>
+            }
+
+        </tbody>
+        <tfoot>
+            <tr>
+            <td></td>
+            <td class="text-right">
+                <strong>Total:</strong>
+            </td>
+            <td>
+                <strong>@Model.Ordertotal.ToString("c")</strong>
+            </td>
+            <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    @* <a class="a-cleanup" asp-controller="Cart" asp-action="Clearcart"><div class="btn btn-primary float-right mr-5"><i class="fa-solod fa-trash-can"></i>Empty Cart</div></a> *@
+
+
+
